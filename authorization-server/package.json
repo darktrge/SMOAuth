@@ -15,7 +15,7 @@
     "express": "4.10.x",
     "express-session": "1.9.x",
     "mongodb": "2.0.x",
-    "mongoose": "^4.0.3",
+    "mongoose": "^4.0.5",
     "oauth2orize": "1.0.x",
     "passport": "0.2.x",
     "passport-http": "0.2.x",

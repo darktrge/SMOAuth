@@ -1,5 +1,5 @@
 {
-  "name": "SMOAuth test",
+  "name": "SMOAuth-resource-server",
   "version": "3.0.2",
   "description": "OAuth2 test",
   "repository": {

@@ -3,7 +3,7 @@
 'use strict';
 
 var MongoClient = require('mongodb').MongoClient;
-var config = require('../config');
+var config = require('../config/index');
 
 //TODO Configure the connection string for mongo to accept more than just local host
 

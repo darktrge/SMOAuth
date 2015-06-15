@@ -1,6 +1,6 @@
 /*jslint node: true */
 /*global exports */
-/*global mongodb */
+/*global models */
 'use strict';
 
 //The refresh tokens.
@@ -35,7 +35,7 @@ exports.find = function (key, done) {
     return done(null);
   }
 
-  mongodb.getCollection(function (collection) {
+  models.getCollection(function (collection) {
     var cursor = collection.find({token: key});
     cursor.nextObject(function (err, token) {
       if (!err && token) {
@@ -71,7 +71,7 @@ exports.save = function (token, userID, clientID, scope, done) {
   });
 
   /*
-  mongodb.getCollection(function (collection) {
+  models.getCollection(function (collection) {
     collection.insert({
       token: token,
       userID: userID,
@@ -99,7 +99,7 @@ exports.delete = function (key, done) {
     return done(err,offer);
   });
 
-  /*mongodb.getCollection(function (collection) {
+  /*models.getCollection(function (collection) {
     collection.remove({
       token: key
     }, function (err, result) {

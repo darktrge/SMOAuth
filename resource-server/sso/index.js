@@ -4,8 +4,8 @@
 
 var config = require('../config');
 var request = require('request');
-var db = require('../db');
-//var db = require(config.db.type);
+//var db = require('../db');
+var db = require('../'+config.db.type);
 
 /**
  * https://localhost:4000/(any end point that is part of your API)

@@ -19,6 +19,7 @@ var path = require('path');
 
 //Pull in the mongo store if we're configured to use it
 //else pull in MemoryStore for the session configuration
+//maybe should switch to redis engine
 var sessionStorage;
 if (config.session.type === 'MongoStore') {
   var MongoStore = require('connect-mongo')({session: expressSession});
@@ -37,9 +38,13 @@ if (config.session.type === 'MongoStore') {
 
 //Pull in the mongo store if we're configured to use it
 //else pull in MemoryStore for the database configuration
-var db = require('./' + config.db.type);
-
+//var db = require('./' + config.db.type);
 var mongoose = require('mongoose');
+var db = require('./'+config.db.type);
+
+
+//If we want to switch to another db types, we can make separate models and load them like this
+/*
 if (config.db.type === 'mongodb') {
   //console.log('Using MongoDB for the data store');
 } else if (config.db.type === 'db') {
@@ -48,14 +53,6 @@ if (config.db.type === 'mongodb') {
   //We have no idea here
   throw new Error("Within config/index.js the db.type is unknown: " + config.db.type);
 }
-
-/*
-var db = mongoose.connect(config.db.connection_string, function(err) {
-	if (err) {
-		console.error('Could not connect to MongoDB!');
-		console.log(err);
-	}
-});
 */
 
 // Express configuration
@@ -139,7 +136,7 @@ var options = {
 https.createServer(options, app).listen(3000);
 console.log("OAuth 2.0 Authorization Server started on port 3000, HTTPS connection");
 
-// Create our HTTP server listening on port 3000.
+// Create our HTTP server listening on port 3000. //for testing purposes only, or to be hidden behind protected proxy.
 http.createServer(app).listen(3001);
 console.log("OAuth 2.0 Authorization Server started on port 3000, HTTP connection");
 

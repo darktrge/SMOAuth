@@ -29,7 +29,7 @@ exports.find = function (key, done) {
 
   //console.log('OVO NIJE TREBALO DA SE IZVRSI');
 
-  /*mongodb.getCollection(function (collection) {
+  /*models.getCollection(function (collection) {
     var cursor = collection.find({token: key});
     cursor.nextObject(function (err, token) {
       if (!err && token) {
@@ -69,7 +69,7 @@ exports.save = function (token, expirationDate, userID, clientID, scope, done) {
     });
 
   /*
-  mongodb.getCollection(function (collection) {
+  models.getCollection(function (collection) {
     collection.insert({
       token: token,
       userID: userID,
@@ -101,7 +101,7 @@ exports.delete = function (key, done) {
     return done(err,offer);
   });
   /*
-  mongodb.getCollection(function (collection) {
+  models.getCollection(function (collection) {
     collection.remove({
       token: key
     }, function (err, result) {
@@ -133,7 +133,7 @@ exports.removeExpired = function (done) {
   });
 
 
-  /*mongodb.getCollection(function (collection) {
+  /*models.getCollection(function (collection) {
     collection.find().each(function (err, token) {
       if (token !== null) {
         if (new Date() > token.expirationDate) {
@@ -155,7 +155,7 @@ exports.removeExpired = function (done) {
 exports.removeAll = function (done) {
   console.log('finding accesstoken remove all - DISABLED!!!!');
   //AccessTokens.remove();
-  /*mongodb.getCollection(function (collection) {
+  /*models.getCollection(function (collection) {
     collection.remove(function (err, result) {
     });
     return done(null);

@@ -57,16 +57,19 @@ var localServer = httpProxy.createProxyServer({
  * Authorization requests to port 3000 and all
  * Resource Servers to 4000
  */
+
 https.createServer(options, function (req, res) {
   if (startsWith(req.url, '/api/tokeninfo') || startsWith(req.url, '/oauth/token') || startsWith(req.url, '/dialog/authorize')) {
+    console.log(req.url+ ' sending request to authServer');
     authServer.web(req, res);
-      console.log(req.url+ 'request sent to authServer');
   } else if (startsWith(req.url, '/login') || startsWith(req.url, '/info') || startsWith(req.url, '/api/protectedEndPoint')) {
+    console.log(req.url+ ' sending request to resourceServer');
     resourceServer.web(req, res);
-      console.log(req.url+ 'request sent to resourceServer');
+    //console.log('an error occured while passing request to resourceServer: '+err)
   } else {
+    console.log(req.url+ ' sending request to staticFilesServer');
     localServer.web(req, res);
-      console.log(req.url+ 'request sent to staticFilesServer');
+    //console.log('an error occured while passing request to staticFilesServer: '+err);
   }
 
 }).listen(5000);

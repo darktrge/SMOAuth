@@ -43,7 +43,7 @@ exports.db = {
 
 exports.db = {
   timeToCheckExpiredTokens: 3600,
-  type: "mongodb",
+  type: "models",//directory name with data models. e.g. swith to mysql, create folder mysql with all models required
   dbName: "smportal-dev"
 };
 

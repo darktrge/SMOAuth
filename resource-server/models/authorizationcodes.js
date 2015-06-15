@@ -1,6 +1,6 @@
 /*jslint node: true */
 /*global exports */
-/*global mongodb */
+/*global models */
 'use strict';
 
 //The authorization codes.
@@ -19,15 +19,15 @@ var mongoose = require('mongoose'),
  * @returns The authorization code if found, otherwise returns null
  */
 exports.find = function (key, done) {
-  //console.log('finding authorization-code');
+  console.log('finding authorization-code');
   mongodb.getCollection(function (collection) {
     var cursor = collection.find({token: key});
     cursor.nextObject(function (err, token) {
       if (!err && token) {
-        //console.log('authorization-code succesfully saved');
+        console.log('authorization-code succesfully saved');
         return done(null, token);
       } else {
-        //console.log('ERROR finding authorization-code');
+        console.log('ERROR finding authorization-code');
         return done(null);
       }
     });
@@ -45,7 +45,7 @@ exports.find = function (key, done) {
  * @returns returns this with null
  */
 exports.save = function (code, clientID, redirectURI, userID, scope, done) {
-  //console.log('saving authorization-code');
+  console.log('saving authorization-code');
   mongodb.getCollection(function (collection) {
     collection.insert({
       token: code,
@@ -58,7 +58,7 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
         console.log('ERROR saving authorization-code');
         return done(err);
       } else {
-        //console.log('saving authorization-code OK');
+        console.log('saving authorization-code OK');
         return done(null);
       }
     });
@@ -71,7 +71,7 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
  * @param done Calls this with null always
  */
 exports.delete = function (key, done) {
-  //console.log('deleting authorization-code');
+  console.log('deleting authorization-code');
   mongodb.getCollection(function (collection) {
     collection.remove({
       token: key
@@ -80,7 +80,7 @@ exports.delete = function (key, done) {
         console.log('ERROR deleting authorization-code');
         return done(err, result);
       } else {
-        //console.log('deleting authorization-code OK');
+        console.log('deleting authorization-code OK');
         return done(null, result);
       }
     });

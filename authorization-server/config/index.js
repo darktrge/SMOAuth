@@ -32,12 +32,12 @@ exports.token = {
  * for expired access tokens.  For example, if it's set to 3600, then that's
  * one hour to check for expired access tokens.
  * type - The type of database to use.  "db" for "in-memory", or
- * "mongodb" for the mongo database store.
+ * "models" for the mongo database store.
  * dbName - The database name to use.
  */
 exports.db = {
     timeToCheckExpiredTokens: 3600,
-    type: "mongodb",
+    type: "models",//directory name with data models. e.g. swith to mysql, create folder mysql with all models required
     dbName: "smportal-dev",
     connection_string: "mongodb://localhost/smportal-dev"
 };
