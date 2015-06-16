@@ -26,13 +26,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     utils = require('../utils');
 
- var db_mongoose = mongoose.connect("mongodb://localhost/smportal-dev", function(err) {
- if (err) {
- console.error('Could not connect to MongoDB!');
- //console.log(err);
- }
- });
-
 /**
  * OAuthClient Schema
  */
@@ -111,21 +104,12 @@ var OAuthClients = mongoose.model('OAuthClient', OAuthClientSchema);
 
 var Clients=mongoose.model('OAuthClient');
 
+/*
 Clients.find().exec(function (err,data) {
     //console.log(clients);
     clients=data;
     //console.log(clients);
-  });
-
-/*clients.find = function(id,done){
-    //console.log('ddd');
-    //console.log('clients.find');
-    //console.log('ddd');
-    var client = clients.findOne({ 'name.last': 'Ghost' });
-    if(client){
-        return done(null, client);
-    }
-}*/
+  });*/
 
 /**
  * Returns a client if it finds one, otherwise returns
@@ -142,21 +126,6 @@ exports.find = function (id, done) {
       //console.log('client response from db',found);
       return done(null,found);
     });
-    /*for (var i = 0, len = clients.length; i < len; i++) {
-       var client = clients[i];
-       if (client.id === id) {
-           //console.log(client);
-       return done(null, client);
-     }
-    }
-    for (var i = 0, len = clients.length; i < len; i++) {
-    var client = clients[i];
-    if (client._id === id) {
-        //console.log(client, 'client found');
-      return done(null, client);
-    }
-  }
-  return done(null, null);*/
 };
 
 /**
@@ -170,11 +139,4 @@ exports.findByClientId = function (clientId, done) {
     OAuthClients.findOne({clientId:clientId},function(err,found){
       return done(null,found);
     });
-    /*for (var i = 0, len = clients.length; i < len; i++) {
-      var client = clients[i];
-      if (client.clientId === clientId) {
-        return done(null, client);
-      }
-    }
-    return done(null, null);*/
 };

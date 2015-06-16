@@ -8,7 +8,7 @@
 //in the RFC The OAuth 2.0 Authorization Framework: Bearer Token Usage
 //(http://tools.ietf.org/html/rfc6750)
 
-var mongodb = require('./mongoinit.js');
+//var mongodb = require('./mongoinit.js');
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
