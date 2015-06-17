@@ -138,7 +138,7 @@ console.log("OAuth 2.0 Authorization Server started on port 3000, HTTPS connecti
 
 // Create our HTTP server listening on port 3000. //for testing purposes only, or to be hidden behind protected proxy.
 http.createServer(app).listen(3001);
-console.log("OAuth 2.0 Authorization Server started on port 3000, HTTP connection");
+console.log("OAuth 2.0 Authorization Server started on port 3001, HTTP connection");
 
 
 
