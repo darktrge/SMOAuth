@@ -16,8 +16,8 @@ var localDb;
  * Gets the static collection of "storage" that is stored within mongo db
  * @param next Calls this when completed
  */
-var getCollection = function (next) {
-  if (typeof localDb !== "undefined") {
+var getCollection = function (next) { //used during development - feel free to remove
+  /*if (typeof localDb !== "undefined") {
     //The database is already initialized
     var localCollection = localDb.collection('tokens');
     next(localCollection);
@@ -39,7 +39,7 @@ var getCollection = function (next) {
       });
       getCollection(next);
     });
-  }
+  }*/
 };
 
 exports.getCollection = getCollection;

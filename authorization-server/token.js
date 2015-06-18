@@ -47,10 +47,10 @@ exports.info = [
                 if (expirationLeft <= 0) {
                   res.json({error: "invalid_token"});
                 } else {
-                  res.json({audience: client.clientId, expires_in: expirationLeft});
+                  res.json({audience: client.clientID, expires_in: expirationLeft});
                 }
               } else {
-                res.json({audience: client.clientId});
+                res.json({audience: client.clientID});
               }
             }
           });

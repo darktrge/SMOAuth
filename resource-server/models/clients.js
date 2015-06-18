@@ -143,7 +143,6 @@ exports.find = function (id, done) {
     OAuthClients.findById(id,function(err,found){
       return done(null,found);
     });
-    console.log('OVO NE BI SMELO DA SE IZVRSI!');
     /*for (var i = 0, len = clients.length; i < len; i++) {
        var client = clients[i];
        if (client.id === id) {

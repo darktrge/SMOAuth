@@ -18,11 +18,7 @@ var mongoose = require('mongoose'),
  */
 exports.find = function (key, done) {
   //console.log('finding accesstoken find');
-
   AccessTokens.findOne({token:key},function(err,found){
-    //console.log("trying to find access token:", key);
-    //console.log("error:", err);
-    //console.log("found:", found);
     return done(err,found);
   });
 
@@ -46,17 +42,17 @@ exports.find = function (key, done) {
  * Saves a access token, expiration date, user id, client id, and scope.
  * @param token The access token (required)
  * @param expirationDate The expiration of the access token that is a javascript Date() object (required)
- * @param userID The user ID (required)
- * @param clientID The client ID (required)
+ * @param userId The user ID (required)
+ * @param clientId The client ID (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (token, expirationDate, userID, clientID, scope, done) {
+exports.save = function (token, expirationDate, userId, clientId, scope, done) {
     //console.log('attempting accesstoken save');
-    var token = new AccessTokens({token:token, expirationDate:expirationDate,
-                userID:userID, clientID:clientID, scope:scope});
-    token.save(function(err) {
+    var aToken = new AccessTokens({token:token, expirationDate:expirationDate,
+                userId:userId, clientId:clientId, scope:scope});
+    aToken.save(function(err) {
       if (err) {
           //console.log('accesstoken NOT saved due to');
           //console.log('error',err);
@@ -71,9 +67,9 @@ exports.save = function (token, expirationDate, userID, clientID, scope, done) {
   models.getCollection(function (collection) {
     collection.insert({
       token: token,
-      userID: userID,
+      userId: userId,
       expirationDate: expirationDate,
-      clientID: clientID,
+      clientId: clientId,
       scope: scope
     }, function (err, inserted) {
       if (err) {
@@ -94,7 +90,6 @@ exports.save = function (token, expirationDate, userID, clientID, scope, done) {
  */
 exports.delete = function (key, done) {
   //console.log('attempting accesstoken key delete');
-
   AccessTokens.findOneAndRemove({token:key},function(err,offer) {
     console.log(err);
     return done(err,offer);
@@ -163,7 +158,7 @@ exports.removeAll = function (done) {
 
 var AccessTokenSchema = new Schema({
   token: String,
-  userID: {
+  userId: {
     type: String,
     trim: true,
     default: null
@@ -172,10 +167,10 @@ var AccessTokenSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  clientID: {
+  clientId: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   },
   scope: {
     type: String

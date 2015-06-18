@@ -19,8 +19,16 @@ var mongoose = require('mongoose'),
  * @returns The authorization code if found, otherwise returns null
  */
 exports.find = function (key, done) {
+
+  AuthorizationCodes.findOne({code:key},function(err,found){
+    if (!err && found) {
+      return done(err,found);
+    }else{
+      return done(null)
+    }
+  });
   //console.log('finding authorization-code');
-  mongodb.getCollection(function (collection) {
+  /*mongodb.getCollection(function (collection) {
     var cursor = collection.find({token: key});
     cursor.nextObject(function (err, token) {
       if (!err && token) {
@@ -31,27 +39,40 @@ exports.find = function (key, done) {
         return done(null);
       }
     });
-  });
+  });*/
 };
 
 /**
  * Saves a authorization code, client id, redirect uri, user id, and scope.
  * @param code The authorization code (required)
- * @param clientID The client ID (required)
- * @param userID The user ID (required)
+ * @param clientId The client ID (required)
+ * @param userId The user ID (required)
  * @param redirectURI The redirect URI of where to send access tokens once exchanged (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (code, clientID, redirectURI, userID, scope, done) {
+exports.save = function (code, clientId, redirectURI, userId, scope, done) {
+  var code = new AuthorizationCodes({code:code, clientId:clientId,redirectURI:redirectURI,
+    userId:userId, scope:scope});
+  code.save(function(err) {
+    if (err) {
+      //console.log('AuthorizationCode NOT saved due to');
+      //console.log('error',err);
+      return done(err);
+    } else {
+      //console.log('AuthorizationCode saved');
+      return done(null);
+    }
+  });
+
   //console.log('saving authorization-code');
-  mongodb.getCollection(function (collection) {
+  /*mongodb.getCollection(function (collection) {
     collection.insert({
       token: code,
       clientID: clientID,
       redirectURI: redirectURI,
-      userID: userID,
+      userId: userId,
       scope: scope
     }, function (err, inserted) {
       if (err) {
@@ -62,7 +83,7 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
         return done(null);
       }
     });
-  });
+  });*/
 };
 
 /**
@@ -71,6 +92,12 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
  * @param done Calls this with null always
  */
 exports.delete = function (key, done) {
+  AuthorizationCodes.findOneAndRemove({code:key},function(err,found) {
+    //console.log(err);
+    //console.log(found,'deleted');
+    return done(err,found);
+  });
+  /*
   //console.log('deleting authorization-code');
   mongodb.getCollection(function (collection) {
     collection.remove({
@@ -84,16 +111,34 @@ exports.delete = function (key, done) {
         return done(null, result);
       }
     });
-  });
+  });*/
 };
 
 
 var AuthorizationCodesSchema = new Schema({
-  token: String,
-  clientID: String,
-  redirectURI: String,
-  userID: String,
-  scope: String,
+  code: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  clientId: {
+    type: String,
+    trim: true,
+    /*required: true*/
+  },
+  redirectURI: {
+    type: String,
+    trim: true,
+    /*required: true*/
+  },
+  userId: {
+    type: String,
+    trim: true,
+    /*required: true*/
+  },
+  scope: {
+    type: String
+  }
   /*user: {
     type: Schema.ObjectId,
     ref: 'Users'

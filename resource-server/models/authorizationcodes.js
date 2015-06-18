@@ -7,7 +7,7 @@
 //You will use these to get the access codes to get to the data in your endpoints as outlined
 //in the RFC The OAuth 2.0 Authorization Framework: Bearer Token Usage
 //(http://tools.ietf.org/html/rfc6750)
-var mongodb = require('./mongoinit.js');
+
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
@@ -19,19 +19,27 @@ var mongoose = require('mongoose'),
  * @returns The authorization code if found, otherwise returns null
  */
 exports.find = function (key, done) {
-  console.log('finding authorization-code');
-  mongodb.getCollection(function (collection) {
+
+  AuthorizationCodes.findOne({code:key},function(err,found){
+    if (!err && found) {
+      return done(err,found);
+    }else{
+      return done(null)
+    }
+  });
+  //console.log('finding authorization-code');
+  /*mongodb.getCollection(function (collection) {
     var cursor = collection.find({token: key});
     cursor.nextObject(function (err, token) {
       if (!err && token) {
-        console.log('authorization-code succesfully saved');
+        //console.log('authorization-code succesfully saved');
         return done(null, token);
       } else {
-        console.log('ERROR finding authorization-code');
+        //console.log('ERROR finding authorization-code');
         return done(null);
       }
     });
-  });
+  });*/
 };
 
 /**
@@ -44,9 +52,22 @@ exports.find = function (key, done) {
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (code, clientID, redirectURI, userID, scope, done) {
-  console.log('saving authorization-code');
-  mongodb.getCollection(function (collection) {
+exports.save = function (code, clientId, redirectURI, userId, scope, done) {
+  var code = new AuthorizationCodes({code:code, clientId:clientId,redirectURI:redirectURI,
+    userId:userId, scope:scope});
+  code.save(function(err) {
+    if (err) {
+      console.log('AuthorizationCode NOT saved due to');
+      console.log('error',err);
+      return done(err);
+    } else {
+      console.log('AuthorizationCode saved');
+      return done(null);
+    }
+  });
+
+  //console.log('saving authorization-code');
+  /*mongodb.getCollection(function (collection) {
     collection.insert({
       token: code,
       clientID: clientID,
@@ -58,11 +79,11 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
         console.log('ERROR saving authorization-code');
         return done(err);
       } else {
-        console.log('saving authorization-code OK');
+        //console.log('saving authorization-code OK');
         return done(null);
       }
     });
-  });
+  });*/
 };
 
 /**
@@ -71,7 +92,13 @@ exports.save = function (code, clientID, redirectURI, userID, scope, done) {
  * @param done Calls this with null always
  */
 exports.delete = function (key, done) {
-  console.log('deleting authorization-code');
+  AuthorizationCodes.findOneAndRemove({code:key},function(err,found) {
+    console.log(err);
+    console.log(found,'deleted');
+    return done(err,found);
+  });
+  /*
+  //console.log('deleting authorization-code');
   mongodb.getCollection(function (collection) {
     collection.remove({
       token: key
@@ -80,20 +107,38 @@ exports.delete = function (key, done) {
         console.log('ERROR deleting authorization-code');
         return done(err, result);
       } else {
-        console.log('deleting authorization-code OK');
+        //console.log('deleting authorization-code OK');
         return done(null, result);
       }
     });
-  });
+  });*/
 };
 
 
 var AuthorizationCodesSchema = new Schema({
-  token: String,
-  clientID: String,
-  redirectURI: String,
-  userID: String,
-  scope: String,
+  code: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  clientId: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  redirectURI: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  userId: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  scope: {
+    type: String
+  }
   /*user: {
     type: Schema.ObjectId,
     ref: 'Users'

@@ -8,7 +8,7 @@
 //in the RFC The OAuth 2.0 Authorization Framework: Bearer Token Usage
 //(http://tools.ietf.org/html/rfc6750)
 
-var mongodb = require('./mongoinit.js');
+//var mongodb = require('./mongoinit.js');
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
@@ -50,21 +50,24 @@ exports.find = function (key, done) {
 /**
  * Saves a refresh token, user id, client id, and scope.
  * @param token The refresh token (required)
- * @param userID The user ID (required)
- * @param clientID The client ID (required)
+ * @param userId The user ID (required)
+ * @param clientId The client ID (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (token, userID, clientID, scope, done) {
-
-  console.log('attempting refreshtoken save');
-  var token = new RefreshTokens({token:token,
-    userID:userID, clientID:clientID, scope:scope});
-  token.save(function(err) {
+exports.save = function (token, userId, clientId, scope, done) {
+  var rToken = new RefreshTokens({token:token,
+    userId:userId, clientId:clientId, scope:scope});
+    //console.log(rToken);
+    //console.log(token,userId,clientId,scope);
+  rToken.save(function(err) {
     if (err) {
+      console.log('refreshtoken NOT saved');
+      console.log('error',err);
       return done(err);
     } else {
+      console.log('refreshtoken saved');
       return done(null);
     }
   });
@@ -117,20 +120,20 @@ var RefreshTokenSchema = new Schema({
     trim: true,
     required: true
   },
-  userID: {
+  userId: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   },
-  clientID: {
+  clientId: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   },
   scope: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   }
 });
 

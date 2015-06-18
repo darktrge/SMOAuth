@@ -40,7 +40,7 @@ if (config.session.type === 'MongoStore') {
 //else pull in MemoryStore for the database configuration
 //var db = require('./' + config.db.type);
 var mongoose = require('mongoose');
-var db = require('./'+config.db.type);
+var db = require('./'+config.db.type).db;
 
 
 //If we want to switch to another db types, we can make separate models and load them like this

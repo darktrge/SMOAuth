@@ -71,10 +71,12 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectURI, d
     if (err) {
       return done(err);
     }
+    console.log(authCode);
     if (!authCode) {
       return done(null, false);
     }
-    if (client.id !== authCode.clientID) {
+    //console.log(authCode,'dasdasd');
+    if (client.id !== authCode.clientId) {
       return done(null, false);
     }
     if (redirectURI !== authCode.redirectURI) {
@@ -92,7 +94,7 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectURI, d
         return done(null, false);
       }
       var token = utils.uid(config.token.accessTokenLength);
-      db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userID, authCode.clientID, authCode.scope, function (err) {
+      db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientID, authCode.scope, function (err) {
         if (err) {
           return done(err);
         }
@@ -101,7 +103,7 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectURI, d
         //a refresh token or not
         if (authCode.scope && authCode.scope.indexOf("offline_access") === 0) {
           refreshToken = utils.uid(config.token.refreshTokenLength);
-          db.refreshTokens.save(refreshToken, authCode.userID, authCode.clientID, authCode.scope, function (err) {
+          db.refreshTokens.save(refreshToken, authCode.userId, authCode.clientId, authCode.scope, function (err) {
             if (err) {
               return done(err);
             }
@@ -148,6 +150,7 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
       if (scope && scope.indexOf("offline_access") === 0) {
         refreshToken = utils.uid(config.token.refreshTokenLength);
         db.refreshTokens.save(refreshToken, user.id, client.id, scope, function (err) {
+          console.log(refreshToken,user.id,client.id,scope)
           if (err) {
             return done(err);
           }
@@ -193,11 +196,11 @@ server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken
     if (!authCode) {
       return done(null, false);
     }
-    if (client.id !== authCode.clientID) {
+    if (client.id !== authCode.clientId) {
       return done(null, false);
     }
     var token = utils.uid(config.token.accessTokenLength);
-    db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userID, authCode.clientID, authCode.scope, function (err) {
+    db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientID, authCode.scope, function (err) {
       if (err) {
         return done(err);
       }
@@ -224,9 +227,11 @@ server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken
  * first, and rendering the `dialog` view.
  */
 exports.authorization = [
-  login.ensureLoggedIn(),
-  server.authorization(function (clientID, redirectURI, scope, done) {
-    db.clients.findByClientId(clientID, function (err, client) {
+    login.ensureLoggedIn(),
+    server.authorization(function (clientId, redirectURI, scope, done) {
+    db.clients.findByClientId(clientId, function (err, client) {
+      //console.log('error is:',err,'if there is ONE :)');
+      //console.log('client Found:',client, 'for client:', clientId);
       if (err) {
         return done(err);
       }
@@ -238,7 +243,7 @@ exports.authorization = [
       //          the server.
       //if (client && client.allowedDomainURL != redirectURI) {
       if (config.settings.enforceRedirectURI === true && client && redirectURI.indexOf(client.allowedDomainURL)==-1) {
-        console.log(client.allowedDomainURL+' doesnt match '+redirectURI)
+        //console.log(client.allowedDomainURL+' doesnt match '+redirectURI)
         return done({"name":"AuthorizationError","message":"redirect URL doesnt match the one defined in application","code":"bad redirect URL","status":403});
       }
 

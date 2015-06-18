@@ -72,44 +72,15 @@ OAuthClientSchema.statics = {
 
 OAuthClientSchema.pre('save', function(next) {
     if (!this.isNew) return next();
-    this.clientId = utils.uid(16);
+    this.clientID = utils.uid(16);
     this.clientSecret = utils.uid(32);
     next();
 });
-
-var clients = [
-  {
-    id: '1',
-    name: 'ContentParadise1',
-    clientId: 'abc123',
-    clientSecret: 'ssh-secret'
-  },
-  {
-    id: '2',
-    name: 'ContentParadise1',
-    clientId: 'xyz123',
-    clientSecret: 'ssh-password'
-  },
-  {
-    id: '3',
-    name: 'ContentParadise_trusted',
-    clientId: 'trustedClient',
-    clientSecret: 'ssh-otherpassword',
-    trustedClient: true
-  },
-];
 
 mongoose.model('OAuthClient', OAuthClientSchema);
 var OAuthClients = mongoose.model('OAuthClient', OAuthClientSchema);
 
 var Clients=mongoose.model('OAuthClient');
-
-/*
-Clients.find().exec(function (err,data) {
-    //console.log(clients);
-    clients=data;
-    //console.log(clients);
-  });*/
 
 /**
  * Returns a client if it finds one, otherwise returns

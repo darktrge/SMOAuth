@@ -50,19 +50,20 @@ exports.find = function (key, done) {
 /**
  * Saves a refresh token, user id, client id, and scope.
  * @param token The refresh token (required)
- * @param userID The user ID (required)
+ * @param userId The user ID (required)
  * @param clientID The client ID (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (token, userID, clientID, scope, done) {
+exports.save = function (token, userId, clientId, scope, done) {
 
   var token = new RefreshTokens({token:token,
-    userID:userID, clientID:clientID, scope:scope});
+    userId:userId, clientId:clientId, scope:scope});
   token.save(function(err) {
     if (err) {
       console.log('refreshtoken NOT saved');
+      console.log('error:',err);
       return done(err);
     } else {
       console.log('refreshtoken saved');
@@ -116,20 +117,22 @@ var RefreshTokenSchema = new Schema({
   token: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   },
-  userID: {
-    ref: 'Users',
-    type: Schema.ObjectId
+  userId: {
+    type: String,
+    trim: true,
+    /*required: true*/
   },
   clientID: {
-    ref: 'OAuthClients',
-    type: Schema.ObjectId
+    type: String,
+    trim: true,
+    /*required: true*/
   },
   scope: {
     type: String,
     trim: true,
-    required: true
+    /*required: true*/
   }
 });
 

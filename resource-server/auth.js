@@ -42,6 +42,8 @@ passport.use(new LocalStrategy(
     }, function (error, response, body) {
       var jsonResponse = JSON.parse(body);
       if (response.statusCode === 200 && jsonResponse.access_token) {
+        console.log(body);
+        console.log(jsonResponse);
         //TODO scopes
         var expirationDate = null;
         if (jsonResponse.expires_in) {

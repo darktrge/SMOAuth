@@ -38,22 +38,10 @@ var users={}
  * @returns The user if found, otherwise returns null
  */
 exports.find = function (id, done) {
-  var userFound=null;
-  var tatata=null;
   Users.findById(id,function(err,found){
     //console.log(found);
     return done(null,found);
   });
-  //console.log(userFound,'dasdasdasdasdasdadasda');
-  //console.log(tatata,'tatata');
-  //console.log('STAMPAM USERA');
-  /*for (var i = 0, len = users.length; i < len; i++) {
-    var user = users[i];
-    if (user.id === id) {
-      return done(null, user);
-    }
-  }
-  return done(null, null);*/
 };
 
 /**
@@ -204,7 +192,6 @@ UserSchema.methods.authenticate = function(password) {
 UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	var _this = this;
 	var possibleUsername = username + (suffix || '');
-
 	_this.findOne({
 		username: possibleUsername
 	}, function(err, user) {

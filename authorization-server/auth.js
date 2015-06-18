@@ -40,26 +40,31 @@ passport.use(new LocalStrategy({
 			passwordField: 'password'
 		},
 		function(username, password, done) {
+      //console.log('entered local strategy');
 			User.findOne({
 				username: username
 			}, function(err, user) {
+        //console.log('entered User.findOne');
 				if (err) {
           //console.log('local strategy -error happened quering for user',username,password);
 					return done(err);
 				}
+        //console.log('no error found',username,password);
 				if (!user) {
-          console.log('uknown user in local strategy:'+username);
+          //console.log('uknown user in local strategy:'+username);
 					return done(null, false, {
 						message: 'Unknown user or invalid password'
 					});
-				}
+				}else{
+          //console.log('user found in local strategy:'+username);
+        }
 				if (!user.authenticate(password)) {
-					console.log('wrong password used in local strategy for user:',user);
+					//console.log('wrong password used in local strategy for user:',user);
           return done(null, false, {
 						message: 'Unknown user or invalid password'
 					});
 				}
-        console.log('local strategy succesfuly used');
+        //console.log('local strategy succesfuly used');
 				return done(null, user);
 			});
 		}
@@ -88,14 +93,14 @@ passport.use(new BasicStrategy(
       }
 
       if (!client) {
-          console.log('NO CLIENT FOUND');
+          //console.log('NO CLIENT FOUND');
           return done(null, false);
       }
         //console.log('client found', client);
         var clientSecret = password;
 
       if (clientSecret != client.clientSecret) {
-          console.log('Client PASSWORD MISMATCH!!!!!');
+          //console.log('Client PASSWORD MISMATCH!!!!!');
           //console.log('clientSecret',client.clientSecret);
           //console.log('password provided',clientSecret);
           return done(null, false);
@@ -127,7 +132,7 @@ passport.use(new ClientPasswordStrategy(
       }
       if (client.clientSecret != clientSecret) {
         return done(null, false);
-          console.log('passwords MISMATCH');
+          //console.log('passwords MISMATCH');
       }
         //console.log(clientId);
         //console.log(clientSecret);
@@ -150,30 +155,30 @@ passport.use(new BearerStrategy(
       //console.log('entering BearerStrategy');
       db.accessTokens.find(accessToken, function (err, token) {
       if (err) {
-        console.log('BearerStrategy reports error:', err);
+        //console.log('BearerStrategy reports error:', err);
         return done(err);
       }
       if (!token) {
-        console.log('BearerStrategy reports token NOT found:', token);
+        //console.log('BearerStrategy reports token NOT found:', token);
         return done(null, false);
       }
-        console.log('BearerStrategy reports token found:', token);
+        //console.log('BearerStrategy reports token found:', token);
       if (new Date() > token.expirationDate) {
-        console.log('BearerStrategy reports token expired:', token.expirationDate);
+        //console.log('BearerStrategy reports token expired:', token.expirationDate);
         db.accessTokens.delete(accessToken, function (err) {
           //console.log('BearerStrategy tries to delete token:', accessToken);
           return done(err);
         });
       } else {
-        if (token.userID !== null) {
-          //console.log("token.userID !== null passed", token.userID);
-          db.users.find(token.userID, function (err, user) {
+        if (token.userId !== null) {
+          //console.log("token.userId !== null passed", token.userId);
+          db.users.find(token.userId, function (err, user) {
             if (err) {
-              console.log('BearerStrategy cannot match token\'s user:', token.userID, err);
+              //console.log('BearerStrategy cannot match token\'s user:', token.userId, err);
               return done(err);
             }
             if (!user) {
-              console.log('BearerStrategy reports missing user:', token.userID);
+              //console.log('BearerStrategy reports missing user:', token.userId);
               return done(null, false);
             }
             // to keep this example simple, restricted scopes are not implemented,
@@ -182,19 +187,19 @@ passport.use(new BearerStrategy(
             return done(null, user, info);
           });
         } else {
-          console.log("token.userID !== null DIDNT pass for: userID", token.userID);
-          //The request came from a client only since userID is null
+          //console.log("token.userId !== null DIDNT pass for: userId", token.userId);
+          //The request came from a client only since userId is null
           //therefore the client is passed back instead of a user
-          db.clients.find(token.clientID, function (err, client) {
+          db.clients.find(token.clientId, function (err, client) {
             if (err) {
-              console.log('BearerStrategy reports error fetching client:', token.clientID);
+              //console.log('BearerStrategy reports error fetching client:', token.clientID);
               return done(err);
             }
             if (!client) {
-              console.log('BearerStrategy reports client missing client:', token.clientID);
+              //console.log('BearerStrategy reports client missing client:', token.clientID);
               return done(null, false);
             }
-            console.log('BearerStrategy reports client found:', client);
+            //console.log('BearerStrategy reports client found:', client);
             // to keep this example simple, restricted scopes are not implemented,
             // and this is just for illustrative purposes
             var info = {scope: '*'};

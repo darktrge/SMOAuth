@@ -49,10 +49,10 @@ exports.find = function (key, done) {
  * @param done Calls this with null always
  * @returns returns this with null
  */
-exports.save = function (token, expirationDate, userID, clientID, scope, done) {
+exports.save = function (token, expirationDate, userId, clientId, scope, done) {
     console.log('attempting accesstoken save');
     var token = new AccessTokens({token:token, expirationDate:expirationDate,
-                userID:userID, clientID:clientID, scope:scope});
+                userId:userId, clientId:clientId, scope:scope});
     token.save(function(err) {
       if (err) {
           return done(err);
@@ -158,7 +158,7 @@ exports.removeAll = function (done) {
 
 var AccessTokenSchema = new Schema({
   token: String,
-  userID: {
+  userId: {
     type: String,
     trim: true,
     default: null
@@ -167,7 +167,7 @@ var AccessTokenSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  clientID: {
+  clientId: {
     type: String,
     trim: true,
     required: true

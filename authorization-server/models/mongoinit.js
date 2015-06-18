@@ -16,14 +16,17 @@ var localDb;
  * Gets the static collection of "storage" that is stored within mongo db
  * @param next Calls this when completed
  */
-var getCollection = function (next) {
-  if (typeof localDb !== "undefined") {
+
+var getCollection = function (next) { //used during development - feel free to remove
+  /*if (typeof localDb !== "undefined") {
     //The database is already initialized
+    console.log('The database is already initialized');
     var localCollection = localDb.collection('tokens');
     next(localCollection);
   } else {
     //We have to initialize the database and its connection
-    MongoClient.connect('mongodb://127.0.0.1:27017/' + config.db.dbName, function (err, db) {
+    console.log('The database is NOT initialized. Initializing now!!!!');
+    MongoClient.connect(config.db.connection_string+':'+config.db.connection_port, function (err, db) {
       if (err) {
         throw err;
       }
@@ -35,11 +38,11 @@ var getCollection = function (next) {
       });
       localDb.collection('refreshtokens').ensureIndex({token: 1}, function (err, inserted) {
       });
-      localDb.collection('authorizationcodes').ensureIndex({token: 1}, function (err, inserted) {
+      localDb.collection('authorizationcodes').ensureIndex({code: 1}, function (err, inserted) {
       });
       getCollection(next);
     });
-  }
+  }*/
 };
 
 exports.getCollection = getCollection;
