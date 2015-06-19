@@ -57,17 +57,24 @@ exports.find = function (key, done) {
  * @returns returns this with null
  */
 exports.save = function (token, userId, clientId, scope, done) {
+//exports.save = function (token, userId, scope, done) {
   var rToken = new RefreshTokens({token:token,
     userId:userId, clientId:clientId, scope:scope});
-    //console.log(rToken);
-    //console.log(token,userId,clientId,scope);
+    //console.log('----refreshtoken save----');
+    //console.log('rToken',rToken);
+    //console.log('token',token);
+    //console.log('userId',userId);
+    //console.log('clientId',clientId);
+    //console.log('scope',scope);
+    //console.log('done',done);
+    //console.log('----refreshtoken save----');
   rToken.save(function(err) {
     if (err) {
-      console.log('refreshtoken NOT saved');
-      console.log('error',err);
+      //console.log('refreshtoken NOT saved');
+      //console.log('error',err);
       return done(err);
     } else {
-      console.log('refreshtoken saved');
+      //console.log('refreshtoken saved');
       return done(null);
     }
   });
@@ -76,8 +83,8 @@ exports.save = function (token, userId, clientId, scope, done) {
   models.getCollection(function (collection) {
     collection.insert({
       token: token,
-      userID: userID,
-      clientID: clientID,
+      userId: userId,
+      clientId: clientId,
       scope: scope
     }, function (err, inserted) {
       if (err) {
