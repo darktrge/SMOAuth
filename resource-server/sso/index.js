@@ -35,7 +35,7 @@ exports.ensureSingleSignOn = function () {
       req.session.redirectURL = req.originalUrl || req.url;
       res.redirect(
         config.authorization.authorizeURL + '?redirect_uri=' + config.authorization.redirectURL +
-        '&response_type=code&client_id=' + config.client.clientID + '&scope=offline_access'
+        '&response_type=code&client_id=' + config.client.clientId + '&scope=offline_access'
       );
     } else {
       next();
@@ -64,7 +64,7 @@ exports.receivetoken = function (req, res) {
       form: {
         code: req.query.code,
         redirect_uri: config.authorization.redirectURL,
-        client_id: config.client.clientID,
+        client_id: config.client.clientId,
         client_secret: config.client.clientSecret,
         grant_type: 'authorization_code'
       }
@@ -87,14 +87,14 @@ exports.receivetoken = function (req, res) {
           res.redirect(req.session.redirectURL);
         };
         if (jsonResponse.refresh_token) {
-          db.refreshTokens.save(jsonResponse.refresh_token, config.client.clientID, null, function (err) {
+          db.refreshTokens.save(jsonResponse.refresh_token, config.client.clientId, null, function (err) {
             if (err) {
               res.send(500);
             }
-            db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientID, null, saveAccessToken);
+            db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientId, null, saveAccessToken);
           });
         } else {
-          db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientID, null, saveAccessToken);
+          db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientId, null, saveAccessToken);
         }
       } else {
         //Error, someone is trying to put a bad authorization code in

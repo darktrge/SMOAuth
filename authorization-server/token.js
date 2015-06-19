@@ -37,7 +37,7 @@ exports.info = [
           res.json({error: "invalid_token"});
         }
         else {
-          db.clients.find(token.clientID, function (err, client) {
+          db.clients.find(token.clientId, function (err, client) {
             if (err || !client) {
               res.status(400);
               res.json({error: "invalid_token"});
@@ -47,10 +47,10 @@ exports.info = [
                 if (expirationLeft <= 0) {
                   res.json({error: "invalid_token"});
                 } else {
-                  res.json({audience: client.clientID, expires_in: expirationLeft});
+                  res.json({audience: client.clientId, expires_in: expirationLeft});
                 }
               } else {
-                res.json({audience: client.clientID});
+                res.json({audience: client.clientId});
               }
             }
           });

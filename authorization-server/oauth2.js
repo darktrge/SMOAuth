@@ -94,7 +94,7 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectURI, d
         return done(null, false);
       }
       var token = utils.uid(config.token.accessTokenLength);
-      db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientID, authCode.scope, function (err) {
+      db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientId, authCode.scope, function (err) {
         if (err) {
           return done(err);
         }
@@ -200,7 +200,7 @@ server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken
       return done(null, false);
     }
     var token = utils.uid(config.token.accessTokenLength);
-    db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientID, authCode.scope, function (err) {
+    db.accessTokens.save(token, config.token.calculateExpirationDate(), authCode.userId, authCode.clientId, authCode.scope, function (err) {
       if (err) {
         return done(err);
       }

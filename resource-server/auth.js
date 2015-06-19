@@ -37,13 +37,13 @@ passport.use(new LocalStrategy(
         scope: 'offline_access'
       },
       headers: {
-        Authorization: 'Basic ' + new Buffer(config.client.clientID + ':' + config.client.clientSecret).toString('base64')
+        Authorization: 'Basic ' + new Buffer(config.client.clientId + ':' + config.client.clientSecret).toString('base64')
       }
     }, function (error, response, body) {
       var jsonResponse = JSON.parse(body);
       if (response.statusCode === 200 && jsonResponse.access_token) {
-        console.log(body);
-        console.log(jsonResponse);
+        //console.log(body);
+        //console.log(jsonResponse);
         //TODO scopes
         var expirationDate = null;
         if (jsonResponse.expires_in) {
@@ -56,14 +56,18 @@ passport.use(new LocalStrategy(
           return done(null, {accessToken: jsonResponse.access_token, refreshToken: jsonResponse.refresh_token});
         };
         if (jsonResponse.refresh_token) {
-          db.refreshTokens.save(jsonResponse.refresh_token, config.client.clientID, null, function (err) {
+          //console.log('before refreshtoken save');
+          db.refreshTokens.save(jsonResponse.refresh_token,null, config.client.clientId, null, function (err) {
             if (err) {
+              //console.log('error happened:',err);
               return done(null, false);
             }
-            db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientID, null, saveAccessToken);
+            //console.log('no errors happened:',err);
+            db.accessTokens.save(jsonResponse.access_token, expirationDate, null, config.client.clientId, null, saveAccessToken);
           });
+          //console.log('after refreshtoken save');
         } else {
-          db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientID, null, saveAccessToken);
+          db.accessTokens.save(jsonResponse.access_token, expirationDate, null,config.client.clientId, null, saveAccessToken);
         }
       } else {
         return done(null, false);
@@ -102,7 +106,7 @@ passport.use(new BearerStrategy(
                   expirationDate = new Date(new Date().getTime() + (jsonReturn.expires_in * 1000));
                 }
                 //TODO scopes
-                db.accessTokens.save(accessToken, expirationDate, config.client.clientID, null, function (err) {
+                db.accessTokens.save(accessToken, expirationDate, config.client.clientId, null, function (err) {
                   if (err) {
                     return done(err);
                   }

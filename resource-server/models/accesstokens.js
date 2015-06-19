@@ -43,8 +43,8 @@ exports.find = function (key, done) {
  * Saves a access token, expiration date, user id, client id, and scope.
  * @param token The access token (required)
  * @param expirationDate The expiration of the access token that is a javascript Date() object (required)
- * @param userID The user ID (required)
- * @param clientID The client ID (required)
+ * @param userId The user ID (required)
+ * @param clientId The client ID (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
  * @returns returns this with null
@@ -60,25 +60,6 @@ exports.save = function (token, expirationDate, userId, clientId, scope, done) {
           return done(null);
       }
     });
-
-  /*
-  models.getCollection(function (collection) {
-    collection.insert({
-      token: token,
-      userID: userID,
-      expirationDate: expirationDate,
-      clientID: clientID,
-      scope: scope
-    }, function (err, inserted) {
-      if (err) {
-        console.log('accesstoken NOT saved');
-        return done(err);
-      } else {
-        console.log('accesstoken saved');
-        return done(null);
-      }
-    });
-  });*/
 };
 
 /**

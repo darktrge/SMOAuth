@@ -192,11 +192,11 @@ passport.use(new BearerStrategy(
           //therefore the client is passed back instead of a user
           db.clients.find(token.clientId, function (err, client) {
             if (err) {
-              //console.log('BearerStrategy reports error fetching client:', token.clientID);
+              //console.log('BearerStrategy reports error fetching client:', token.clientId);
               return done(err);
             }
             if (!client) {
-              //console.log('BearerStrategy reports client missing client:', token.clientID);
+              //console.log('BearerStrategy reports client missing client:', token.clientId);
               return done(null, false);
             }
             //console.log('BearerStrategy reports client found:', client);

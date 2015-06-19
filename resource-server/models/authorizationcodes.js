@@ -45,8 +45,8 @@ exports.find = function (key, done) {
 /**
  * Saves a authorization code, client id, redirect uri, user id, and scope.
  * @param code The authorization code (required)
- * @param clientID The client ID (required)
- * @param userID The user ID (required)
+ * @param clientId The client ID (required)
+ * @param userId The user ID (required)
  * @param redirectURI The redirect URI of where to send access tokens once exchanged (required)
  * @param scope The scope (optional)
  * @param done Calls this with null always
@@ -57,11 +57,11 @@ exports.save = function (code, clientId, redirectURI, userId, scope, done) {
     userId:userId, scope:scope});
   code.save(function(err) {
     if (err) {
-      console.log('AuthorizationCode NOT saved due to');
-      console.log('error',err);
+      //console.log('AuthorizationCode NOT saved due to');
+      //console.log('error',err);
       return done(err);
     } else {
-      console.log('AuthorizationCode saved');
+      //console.log('AuthorizationCode saved');
       return done(null);
     }
   });
@@ -70,9 +70,9 @@ exports.save = function (code, clientId, redirectURI, userId, scope, done) {
   /*mongodb.getCollection(function (collection) {
     collection.insert({
       token: code,
-      clientID: clientID,
+      clientId: clientId,
       redirectURI: redirectURI,
-      userID: userID,
+      userId: userId,
       scope: scope
     }, function (err, inserted) {
       if (err) {
@@ -93,8 +93,8 @@ exports.save = function (code, clientId, redirectURI, userId, scope, done) {
  */
 exports.delete = function (key, done) {
   AuthorizationCodes.findOneAndRemove({code:key},function(err,found) {
-    console.log(err);
-    console.log(found,'deleted');
+    //console.log(err);
+    //console.log(found,'deleted');
     return done(err,found);
   });
   /*

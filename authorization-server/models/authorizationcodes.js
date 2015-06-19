@@ -66,24 +66,6 @@ exports.save = function (code, clientId, redirectURI, userId, scope, done) {
     }
   });
 
-  //console.log('saving authorization-code');
-  /*mongodb.getCollection(function (collection) {
-    collection.insert({
-      token: code,
-      clientID: clientID,
-      redirectURI: redirectURI,
-      userId: userId,
-      scope: scope
-    }, function (err, inserted) {
-      if (err) {
-        console.log('ERROR saving authorization-code');
-        return done(err);
-      } else {
-        //console.log('saving authorization-code OK');
-        return done(null);
-      }
-    });
-  });*/
 };
 
 /**

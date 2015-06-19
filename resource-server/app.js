@@ -37,6 +37,8 @@ if (config.session.type === 'MongoStore') {
   throw new Error("Within config/index.js the session.type is unknown: " + config.session.type);
 }
 
+//console.log(db)
+
 app.use(expressSession({
     saveUninitialized: true,
     resave: true,

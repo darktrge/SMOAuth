@@ -70,22 +70,6 @@ exports.save = function (token, userId, clientId, scope, done) {
       return done(null);
     }
   });
-
-  /*
-  models.getCollection(function (collection) {
-    collection.insert({
-      token: token,
-      userID: userID,
-      clientID: clientID,
-      scope: scope
-    }, function (err, inserted) {
-      if (err) {
-        return done(err);
-      } else {
-        return done(null);
-      }
-    });
-  });*/
 };
 
 /**
@@ -124,7 +108,7 @@ var RefreshTokenSchema = new Schema({
     trim: true,
     /*required: true*/
   },
-  clientID: {
+  clientId: {
     type: String,
     trim: true,
     /*required: true*/

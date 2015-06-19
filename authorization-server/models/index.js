@@ -8,7 +8,7 @@ var config = require('../config/index');
 
 //console.log(config.db.connection_string);
 
-exports.db = mongoose.connect(config.db.connection_string, function(err) {
+exports.connection = mongoose.connect(config.db.connection_string, function(err) {
   if (err) {
     console.error('Could not connect to MongoDB!');
     console.log(err);

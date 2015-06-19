@@ -30,8 +30,8 @@ describe('access token saving/deleting', function () {
       "madeUpScope",
       function (err) {
         dbTokens.accessTokens.find('someMadeUpAccessTokenLookAtMe', function (err, token) {
-          assert.equal(token.userID, 'madeUpUser');
-          assert.equal(token.clientID, 'madeUpClient');
+          assert.equal(token.userId, 'madeUpUser');
+          assert.equal(token.clientId, 'madeUpClient');
           assert.equal(token.scope, 'madeUpScope');
           dbTokens.accessTokens.delete('someMadeUpAccessTokenLookAtMe', function (err) {
             dbTokens.accessTokens.find('someMadeUpAccessTokenLookAtMe', function (err, token) {

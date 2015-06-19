@@ -8,7 +8,7 @@
  * screen.
  */
 exports.client = {
-  clientID: "trustedClient",
+  clientId: "trustedClient",
   clientSecret: "ssh-otherpassword"
 };
 
@@ -44,8 +44,8 @@ exports.db = {
 exports.db = {
   timeToCheckExpiredTokens: 3600,
   type: "models",//directory name with data models. e.g. swith to mysql, create folder mysql with all models required
-  dbName: "smportal-dev",
-  connection_string: "mongodb://localhost:27017/smportal-dev"
+  dbName: "sm_resource_server",
+  connection_string: "mongodb://localhost:27017/sm_resource_server"
 };
 
 /**

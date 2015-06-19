@@ -26,13 +26,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     utils = require('../utils');
 
- var db_mongoose = mongoose.connect("mongodb://localhost/smportal-dev", function(err) {
- if (err) {
- console.error('Could not connect to MongoDB!');
- //console.log(err);
- }
- });
-
 /**
  * OAuthClient Schema
  */

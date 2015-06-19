@@ -72,7 +72,7 @@ OAuthClientSchema.statics = {
 
 OAuthClientSchema.pre('save', function(next) {
     if (!this.isNew) return next();
-    this.clientID = utils.uid(16);
+    this.clientId = utils.uid(16);
     this.clientSecret = utils.uid(32);
     next();
 });
