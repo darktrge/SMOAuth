@@ -106,7 +106,7 @@ passport.use(new BearerStrategy(
                   expirationDate = new Date(new Date().getTime() + (jsonReturn.expires_in * 1000));
                 }
                 //TODO scopes
-                db.accessTokens.save(accessToken, expirationDate, config.client.clientId, null, function (err) {
+                db.accessTokens.save(accessToken, expirationDate, null,config.client.clientId, null, function (err) { //userId is null...
                   if (err) {
                     return done(err);
                   }

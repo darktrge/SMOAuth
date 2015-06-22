@@ -91,10 +91,10 @@ exports.receivetoken = function (req, res) {
             if (err) {
               res.send(500);
             }
-            db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientId, null, saveAccessToken);
+            db.accessTokens.save(jsonResponse.access_token, expirationDate,null, config.client.clientId, null, saveAccessToken);
           });
         } else {
-          db.accessTokens.save(jsonResponse.access_token, expirationDate, config.client.clientId, null, saveAccessToken);
+          db.accessTokens.save(jsonResponse.access_token, expirationDate, null,config.client.clientId, null, saveAccessToken);
         }
       } else {
         //Error, someone is trying to put a bad authorization code in
