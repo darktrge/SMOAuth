@@ -1,16 +1,18 @@
 <%include header%>
 <!-- HTML login screen form -->
+<!--
+
 <div class="signin">
   <form action="/login" method="post" class="pure-form pure-form-stacked">
     <fieldset>
-      <!-- Upper box with Title, username, and password -->
+      &lt;!&ndash; Upper box with Title, username, and password &ndash;&gt;
       <div class="upper-box">
-        <!-- Title -->
+        &lt;!&ndash; Title &ndash;&gt;
         <div>
           <h1 class="title-padding">Authorization Server</h1>
         </div>
         <div class="pure-control-group">
-          <!-- Username label and input -->
+          &lt;!&ndash; Username label and input &ndash;&gt;
           <label class="labels" for="name">Username:</label>
 
           <div class="input-fields">
@@ -18,7 +20,7 @@
           </div>
         </div>
         <div class="pure-control-group">
-          <!-- Password label and input -->
+          &lt;!&ndash; Password label and input &ndash;&gt;
           <label class="labels" for="password">Password:</label>
 
           <div class="input-fields">
@@ -27,7 +29,7 @@
           </div>
         </div>
       </div>
-      <!-- Bottom box with Sign in -->
+      &lt;!&ndash; Bottom box with Sign in &ndash;&gt;
       <div class="bottom-box">
         <div class="pure-controls sign-in-button">
           <button type="submit" value="Submit" class="pure-button pure-button-primary">Sign in</button>
@@ -35,13 +37,76 @@
       </div>
     </fieldset>
     <div class="from-text">
-      <!-- HTML login screen form
-          <a href="/register">
-              register
-            </a>
-      -->
       username: dmarjanovic, password: password
     </div>
   </form>
 </div>
+-->
+<section class="content">
+  <section class="container">
+    <!-- uiView:  --><section data-ui-view="" class="ng-scope"><section class="row ng-scope" data-ng-controller="AuthenticationController">
+        <div class="col-md-12 text-center">
+        </div>
+        <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+          <form action="/login" method="post" autocomplete="off" class="signin">
+            <div class="text-center head">
+              <!--<img src="/assets/img/sm_icon_medium.png" alt="Smith Micro Software"/>-->
+            </div>
+            <h3>Sign in</h3>
+            <fieldset>
+              <div class="form-group">
+                <!--<label for="username">Username</label>-->
+                <input type="text" id="username" name="username" class="form-control ng-valid ng-dirty" data-ng-model="credentials.username" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <!--<label for="password">Password</label>-->
+                <input type="password" id="password" name="password" class="form-control ng-valid ng-dirty" data-ng-model="credentials.password" placeholder="Password">
+              </div>
+              <div class="from-text">
+                test username: dmarjanovic, password: password
+              </div>
+              <div class="forgot-password">
+                <a href="http://ec2-52-25-25-60.us-west-2.compute.amazonaws.com:9000/#!/password/forgot">Forgot your password?</a>
+              </div>
+              <div class="text-center form-group">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+              </div>
+              <div class="form-group text-center">
+                Not a member yet? <a href="http://ec2-52-25-25-60.us-west-2.compute.amazonaws.com:9000/#!/signup">Get a SmithMicro Account</a>
+              </div>
+              <div data-ng-show="error" class="text-center text-danger ng-hide">
+                <strong data-ng-bind="error" class="ng-binding"></strong>
+              </div>
+              <div class="form-group ssl_info">
+                <div class="center">
+                  <div class="ssl_icon left_side">
+                  </div>
+                  <div class="ssl_content left_side">
+                    <div class="left_side">Secure Server</div>
+                    <div class="ssl_info_control left_side">
+                      <a target="_self" ng-click="toggle()" data-target="#ssl_info_text" data-toggle_button="#ssl_info_text" ng-model="showMeText" class="ng-binding ng-pristine ng-valid">
+                        show me less
+                      </a>
+                    </div>
+                    <div class="arrow_container left_side">
+                      <div class="arrow-down ng-hide" ng-show="!visible"></div>
+                      <div class="arrow-up" ng-show="visible"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="form-group" id="ssl_info_text" ng-show="visible">
+                At Smith Micro, we're serious about protecting your personal information.
+                To ensure your account details are safe, we use Secure Sockets Layer (SSL), and industry standard for encrypting private data over the internet.
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    </section>
+
+  </section>
+</section>
+
 <%include footer%>

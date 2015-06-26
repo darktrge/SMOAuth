@@ -1,0 +1,147 @@
+body{
+    font-family: "Trebuchet MS";
+    color: #585858;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+h3{
+
+}
+
+.left_side{
+    float:left;
+}
+.right_side{
+    float:right;
+}
+.clear{
+    clear:both;
+}
+.navbar-brand .logo {
+    background: transparent url("/img/logo.png") left top no-repeat;
+    width: 168px;
+    height: 40px;
+    margin: -5px 0 22px 0;
+    /*margin: 0;*/
+    float: left;
+}
+
+button.btn-primary {
+    background:#009DF5;
+}
+
+.signin{
+}
+
+    .signin h3{
+    }
+    .signin .head,.register .head{
+        margin-top:15px;
+        margin-bottom:-17px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 172px;
+        height: 46px;
+        background: transparent url("/img/sm_icon_medium.png") left top no-repeat
+    }
+
+    .signin button.btn-primary{
+        width: 100%;
+        margin-top:15px;
+        margin-bottom:15px;
+    }
+
+    .signin button.btn-primary.half-width{
+        width: 35%;
+        margin:5%;
+        text-align:center;
+    }
+
+    .signin fieldset{
+        padding: 0 15px;
+    }
+
+    .signin .ssl_info .center{
+        width:170px;
+        margin:0 auto;
+    }
+    .signin .ssl_info .ssl_icon{
+        /*width:35px;*/
+        background: transparent url("/img/lock-icon.png") left top no-repeat;
+        width: 24px;
+        height: 33px;
+        margin-right:10px;
+    }
+
+    .signin .ssl_info .ssl_content{
+        width:130px;
+    }
+        #ssl_info_text{
+            font-size:12px;
+        }
+
+button.btn-primary:hover{
+    background:#008DE5;
+}
+.centered_element{
+    margin:0 auto;
+}
+
+.arrow_container{
+    width: 10px!important;
+    height: 10px!important;
+    overflow:hidden;
+    position:relative;
+    margin-top: 7px;
+    margin-left: 3px;
+}
+
+.arrow_container .arrow-up {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid blue;
+}
+
+.arrow_container .arrow-down {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-top: 5px solid blue;
+}
+
+.arrow_container .arrow-right {position:absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+
+    border-left: 60px solid blue;
+}
+
+.arrow_container .arrow-left {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+    border-right:10px solid blue;
+}
+
+

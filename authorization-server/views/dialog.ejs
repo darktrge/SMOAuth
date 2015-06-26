@@ -1,10 +1,10 @@
 <%include header%>
-<form action="/dialog/authorize/decision" method="post" class="pure-form pure-form-stacked">
+<!--<form action="/dialog/authorize/decision" method="post" class="pure-form pure-form-stacked">
   <input name="transaction_id" type="hidden" value="<%= transactionID %>">
   <fieldset>
-    <!-- Upper box with Title, username, and password -->
+    &lt;!&ndash; Upper box with Title, username, and password &ndash;&gt;
     <div class="upper-box">
-      <!-- Title -->
+      &lt;!&ndash; Title &ndash;&gt;
       <div>
         <div class="main-text">Decision</div>
         <div class="subtext">Authorization Server</div>
@@ -18,12 +18,12 @@
         </p>
       </div>
     </div>
-    <!-- Bottom box with Sign in -->
+    &lt;!&ndash; Bottom box with Sign in &ndash;&gt;
     <div class="bottom-box">
       <div class="pure-controls accept-cancel-buttons">
         <div>
           <input class="pure-button pure-button-primary" type="submit" value="Accept" id="allow">
-          <!-- Cheat to make a bit of spacing -->
+          &lt;!&ndash; Cheat to make a bit of spacing &ndash;&gt;
           <span>&nbsp&nbsp</span>
           <input class="pure-button" type="submit" value="Deny" name="cancel" id="deny">
         </div>
@@ -31,13 +31,81 @@
     </div>
   </fieldset>
   <div class="from-text">
-    <!--
+    &lt;!&ndash;
     <a href="/register">
         register
     </a>
-    -->
+    &ndash;&gt;
   </div>
-</form>
+</form>-->
+
+<section class="content">
+  <section class="container">
+    <!-- uiView:  -->
+    <section data-ui-view="" class="ng-scope"><section class="row ng-scope" data-ng-controller="AuthenticationController">
+        <div class="col-md-12 text-center">
+        </div>
+        <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+          <form action="/dialog/authorize/decision" method="post" autocomplete="off" class="signin">
+            <div class="text-center head">
+              <!--<img src="/assets/img/sm_icon_medium.png" alt="Smith Micro Software"/>-->
+            </div>
+            <div class="main-text">Decision</div>
+            <div class="subtext">Authorization Server</div>
+            <fieldset>
+              <div class="pure-control-group labels">
+                <p>
+
+                <p><%= user.firstName %>,</p>
+                The application <b><%= client.name %></b> is requesting access to your account.
+                <p>Do you approve?</p>
+                </p>
+              </div>
+              <input name="transaction_id" type="hidden" value="<%= transactionID %>">
+
+              <div class="text-center form-group">
+                <div class="pure-controls accept-cancel-buttons">
+                  <div>
+                    <button class="btn btn-primary half-width" type="submit" value="Accept" id="allow">Allow</button>
+                    <span>&nbsp&nbsp</span>
+                    <button class="btn btn-primary half-width" type="submit" value="Deny" name="cancel" id="deny">Deny</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group ssl_info">
+                <div class="center">
+                  <div class="ssl_icon left_side">
+                  </div>
+                  <div class="ssl_content left_side">
+                    <div class="left_side">Secure Server</div>
+                    <div class="ssl_info_control left_side">
+                      <a target="_self" ng-click="toggle()" data-toggle="true" data-toggle_button="#ssl_info_text" ng-model="showMeText" class="ng-binding ng-pristine ng-valid">
+                        show me less
+                      </a>
+                    </div>
+                    <div class="arrow_container left_side">
+                      <div class="arrow-down ng-hide" ng-show="!visible"></div>
+                      <div class="arrow-up" ng-show="visible"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="form-group" id="ssl_info_text" ng-show="visible">
+                At Smith Micro, we're serious about protecting your personal information.
+                To ensure your account details are safe, we use Secure Sockets Layer (SSL), and industry standard for encrypting private data over the internet.
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    </section>
+
+  </section>
+</section>
+
+
 <%include footer%>
 
 

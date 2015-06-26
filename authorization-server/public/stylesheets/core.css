@@ -1,0 +1,32 @@
+body {
+  font-family: "Trebuchet MS";
+  color: #585858;
+  font-size: 14px;
+  font-weight: 400;
+}
+.content .signin{
+  font-family: "Trebuchet MS";
+}
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+.ng-hide{
+  display:none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
