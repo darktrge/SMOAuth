@@ -229,7 +229,6 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  //console.log('deserializeUser started');
   db.users.find(id, function (err, user) {
     //console.log(id);
     //console.log(err);

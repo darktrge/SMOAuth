@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>OAuth2Orize Recipes Decision</title>
-  <!-- Needed for mobile sites to work -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Style sheets -->
-  <link rel="stylesheet" type="text/css" href="../stylesheets/pure-min.css">
-  <link rel="stylesheet" type="text/css" href="../stylesheets/base.css">
-  <link rel="stylesheet" type="text/css" href="../stylesheets/dialog-modules.css">
-</head>
-<body>
-
+<%include header%>
 <form action="/dialog/authorize/decision" method="post" class="pure-form pure-form-stacked">
   <input name="transaction_id" type="hidden" value="<%= transactionID %>">
   <fieldset>
@@ -52,8 +38,6 @@
     -->
   </div>
 </form>
-
-</body>
-</html>
+<%include footer%>
 
 

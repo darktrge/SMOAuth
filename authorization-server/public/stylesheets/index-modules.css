@@ -4,7 +4,6 @@
  */
 body {
   background: whitesmoke;
-  width: 500px;
   padding-top: 10px;
   padding-left: 20px;
 }
@@ -14,5 +13,9 @@ body {
  */
 a {
   font-size: 100%;
+}
+
+.examples{
+  width:500px;
 }
 
