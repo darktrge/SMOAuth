@@ -33,7 +33,10 @@ button.btn-primary {
 
 .signin{
 }
-
+    .signin .btn{
+        font-size:15px;
+        text-transform: uppercase;
+    }
     .signin h3{
     }
     .signin .head,.register .head{
@@ -52,9 +55,9 @@ button.btn-primary {
         margin-bottom:15px;
     }
 
-    .signin button.btn-primary.half-width{
-        width: 35%;
-        margin:5%;
+    .signin button.half-width{
+        width: 47%;
+        /*margin:5%;*/
         text-align:center;
     }
 
@@ -80,6 +83,12 @@ button.btn-primary {
         #ssl_info_text{
             font-size:12px;
         }
+    .signin .subtext{
+        padding:0;
+    }
+    .signin .btn{
+        border-radius:8px;
+    }
 
 button.btn-primary:hover{
     background:#008DE5;

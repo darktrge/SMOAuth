@@ -6,8 +6,8 @@
     <div class="upper-box">
       &lt;!&ndash; Title &ndash;&gt;
       <div>
-        <div class="main-text">Decision</div>
         <div class="subtext">Authorization Server</div>
+        <div class="main-text">Decision</div>
       </div>
       <div class="pure-control-group labels">
         <p>
@@ -46,12 +46,12 @@
         <div class="col-md-12 text-center">
         </div>
         <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
-          <form action="/dialog/authorize/decision" method="post" autocomplete="off" class="signin">
+          <form action="/dialog/authorize/decision" method="post" autocomplete="off" class="signin form-horizontal">
             <div class="text-center head">
               <!--<img src="/assets/img/sm_icon_medium.png" alt="Smith Micro Software"/>-->
             </div>
             <div class="main-text">Decision</div>
-            <div class="subtext">Authorization Server</div>
+            <div class="subtext text-center">Authorization Server</div>
             <fieldset>
               <div class="pure-control-group labels">
                 <p>
@@ -67,8 +67,8 @@
                 <div class="pure-controls accept-cancel-buttons">
                   <div>
                     <button class="btn btn-primary half-width" type="submit" value="Accept" id="allow">Allow</button>
-                    <span>&nbsp&nbsp</span>
-                    <button class="btn btn-primary half-width" type="submit" value="Deny" name="cancel" id="deny">Deny</button>
+                    <!--<span>&nbsp&nbsp</span>-->
+                    <button class="btn btn-danger half-width" type="submit" value="Deny" name="cancel" id="deny">Deny</button>
                   </div>
                 </div>
               </div>
