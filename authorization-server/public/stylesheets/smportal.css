@@ -18,6 +18,11 @@ h3{
 .clear{
     clear:both;
 }
+
+.navbar-inverse{
+    background-color:#484848;
+}
+
 .navbar-brand .logo {
     background: transparent url("/img/logo.png") left top no-repeat;
     width: 168px;

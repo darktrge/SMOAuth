@@ -71,7 +71,7 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectURI, d
     if (err) {
       return done(err);
     }
-    console.log(authCode);
+    //console.log(authCode);
     if (!authCode) {
       return done(null, false);
     }
@@ -150,7 +150,7 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
       if (scope && scope.indexOf("offline_access") === 0) {
         refreshToken = utils.uid(config.token.refreshTokenLength);
         db.refreshTokens.save(refreshToken, user.id, client.id, scope, function (err) {
-          console.log(refreshToken,user.id,client.id,scope)
+          //console.log(refreshToken,user.id,client.id,scope)
           if (err) {
             return done(err);
           }
