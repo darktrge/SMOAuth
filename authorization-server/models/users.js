@@ -39,8 +39,21 @@ var users={}
  */
 exports.find = function (id, done) {
   Users.findById(id,function(err,found){
-    //console.log(found);
-    return done(null,found);
+      if(err){
+          return done(err,null);
+      }else{
+          return done(null,found);
+      }
+  });
+};
+
+exports.findByUserId = function (id, done) {
+  Users.findById(id,function(err,found){
+      if(err){
+          return done(err,null);
+      }else{
+          return done(null,found);
+      }
   });
 };
 
@@ -136,7 +149,7 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'admin']
+			enum: ['user', 'admin','developer']
 		}],
 		default: ['user']
 	},
@@ -210,8 +223,6 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 mongoose.model('User', UserSchema);
 var Users=mongoose.model('User', UserSchema);
 
-Users.find().exec(function (err,data) {
-    //console.log(users);
-    //users=data;
-    //console.log(users);
-  });
+/*
+Users.find(id, done){}.exec(function (err,data) {
+  });*/

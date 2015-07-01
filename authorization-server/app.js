@@ -103,12 +103,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // to the browser and pass along the status with it
 app.use(function (err, req, res, next) {
   if (err) {
-    res.status(err.status);
-    console.log(err);
-    res.json(err);
-  } else {
-    next();
-  }
+        res.status(err.status);
+        //console.log('ERRORRRRR',err.status);
+        //console.log('req',req);
+        //console.log('res',res);
+        //console.log('next',next);
+        res.json(err);
+    } else {
+        next();
+    }
 });
 
 //From time to time we need to clean up any expired tokens

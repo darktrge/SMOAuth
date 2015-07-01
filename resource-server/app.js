@@ -44,7 +44,8 @@ app.use(expressSession({
     resave: true,
     secret: config.session.secret,
     store: sessionStorage,
-    key: "authorization.sid",
+    //key: "authorization.sid",
+    key: "resourceprovider.sid",
     cookie: {maxAge: config.session.maxAge}
 }));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,7 +58,7 @@ app.use(passport.session());
 // to the browser and pass along the status with it
 app.use(function (err, req, res, next) {
   if (err) {
-    res.status(err.status);
+    //res.status(err.status);
     res.json(err);
   } else {
     next();

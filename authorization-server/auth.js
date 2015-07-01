@@ -225,14 +225,21 @@ passport.use(new BearerStrategy(
 // the client by ID from the database.
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+    /*console.log('serializing user:');
+    console.log(user);*/
+    done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  db.users.find(id, function (err, user) {
-    //console.log(id);
-    //console.log(err);
-    //console.log(user);
-    done(err, user);
+    //console.log('DEserializing user:', id);
+    db.users.findByUserId(id, function (err, user) {
+        if(err){
+            err.status='500';
+            err.message='error deserializing user';
+        }
+        //console.log('DEserializing user error:', err);
+        //console.log('DEserializing user user found:', user);
+        //console.log('calling done function:',  done);
+        done(err, user);
   });
 });

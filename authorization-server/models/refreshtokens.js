@@ -101,22 +101,22 @@ var RefreshTokenSchema = new Schema({
   token: {
     type: String,
     trim: true,
-    /*required: true*/
+    required: true
   },
   userId: {
     type: String,
     trim: true,
-    /*required: true*/
+    required: true
   },
   clientId: {
     type: String,
     trim: true,
-    /*required: true*/
+    required: true
   },
   scope: {
     type: String,
     trim: true,
-    /*required: true*/
+    required: true
   }
 });
 

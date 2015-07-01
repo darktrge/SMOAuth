@@ -170,7 +170,7 @@ var AccessTokenSchema = new Schema({
   clientId: {
     type: String,
     trim: true,
-    /*required: true*/
+    required: true
   },
   scope: {
     type: String
